@@ -65,7 +65,7 @@ function Homepage() {
 export default Homepage */
 
 export default function PaginaInicial() {
-  const username = 'peas'
+  const username = 'renatorrocha'
 
   return (
     <>
@@ -144,7 +144,7 @@ export default function PaginaInicial() {
                 contrastColor: appConfig.theme.colors.neutrals['000'],
                 mainColor: appConfig.theme.colors.primary[500],
                 mainColorLight: appConfig.theme.colors.primary[400],
-                mainColorStrong: appConfig.theme.colors.primary[600]
+                mainColorStrong: appConfig.theme.colors.primary['600']
               }}
             />
           </Box>
@@ -176,13 +176,12 @@ export default function PaginaInicial() {
             <Text
               variant="body4"
               styleSheet={{
-                color: appConfig.theme.colors.neutrals[200],
                 backgroundColor: appConfig.theme.colors.neutrals[900],
                 padding: '3px 10px',
                 borderRadius: '1000px'
               }}
             >
-              {username}
+              <a href='https://github.com/renatorrocha' target={'blank'} style={{ textDecoration: 'none', color: appConfig.theme.colors.neutrals[200] }}>{username}</a>
             </Text>
           </Box>
           {/* Photo Area */}
