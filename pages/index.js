@@ -1,36 +1,7 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components'
+import react from 'react'
+import { useRouter } from 'next/router'
 import appConfig from '../config.json'
-
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-  )
-}
 
 function Titulo(props) {
   const Tag = props.tag || 'h1'
@@ -65,11 +36,12 @@ function Homepage() {
 export default Homepage */
 
 export default function PaginaInicial() {
-  const username = 'renatorrocha'
+  /*   const username = 'renatorrocha' */
+  const [username, setUsername] = react.useState('renatorrocha')
+  const roteamento = useRouter()
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex',
@@ -104,6 +76,12 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (infosDoEvento) {
+              infosDoEvento.preventDefault()
+              console.log(`teve uma mudan;a`)
+              roteamento.push('/chat')
+              // window.location.href = '/chat'  --- abre a pagina chat
+            }}
             styleSheet={{
               display: 'flex',
               flexDirection: 'column',
@@ -125,7 +103,29 @@ export default function PaginaInicial() {
               {appConfig.name}
             </Text>
 
+            {/*             <input
+              type="text"
+              value={username}
+              onChange={function (event) {
+                console.log(`usuario digitou`, event.target.value)
+                // Onde ta o valor
+                const valor = event.target.value
+                Trocar o valor da variavel
+                atraves do react 
+                setUsername(valor)
+              }}
+            /> */}
+
             <TextField
+              value={username}
+              onChange={function (event) {
+                console.log(`usuario digitou`, event.target.value)
+                // Onde ta o valor
+                const valor = event.target.value
+                /*Trocar o valor da variavel
+                atraves do react  */
+                setUsername(valor)
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -136,6 +136,7 @@ export default function PaginaInicial() {
                 }
               }}
             />
+
             <Button
               type="submit"
               label="Entrar"
@@ -181,7 +182,16 @@ export default function PaginaInicial() {
                 borderRadius: '1000px'
               }}
             >
-              <a href='https://github.com/renatorrocha' target={'blank'} style={{ textDecoration: 'none', color: appConfig.theme.colors.neutrals[200] }}>{username}</a>
+              <a
+                href={`https://github.com/${username}`}
+                target={'blank'}
+                style={{
+                  textDecoration: 'none',
+                  color: appConfig.theme.colors.neutrals[200]
+                }}
+              >
+                {username}
+              </a>
             </Text>
           </Box>
           {/* Photo Area */}
